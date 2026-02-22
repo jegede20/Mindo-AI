@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindo AI — Think Smarter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7D9;
+    --cream-deeper: #E0D8C8;
+    --black: #0A0A0A;
+    --black-soft: #111111;
+    --black-card: #161616;
+    --black-border: #2A2A2A;
+    --black-muted: #3A3A3A;
+    --accent: #C8A96E;
+    --accent-light: #E8C98E;
+    --accent-dim: rgba(200,169,110,0.15);
+    --text-primary: #F5F0E8;
+    --text-secondary: #9A9080;
+    --text-muted: #5A5248;
+    --sidebar-w: 280px;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── AUTH PAGE ─────────────────────────────────────── */
+  #auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .auth-left {
+    flex: 1;
+    background: var(--black-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-left::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+  }
+
+  .auth-left::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.05) 0%, transparent 70%);
+    bottom: -80px;
+    right: -80px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .auth-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .logo-mark {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 8px 32px rgba(200,169,110,0.3);
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text span { color: var(--accent); }
+
+  .auth-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .auth-tagline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .auth-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .auth-features {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    max-width: 300px;
+  }
+
+  .auth-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.07);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .auth-feature-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-dim);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Auth Right */
+  .auth-right {
+    width: 480px;
+    background: var(--black-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 48px;
+    border-left: 1px solid var(--black-border);
+    animation: fadeIn 0.6s ease both;
+  }
+
+  .auth-form-container { width: 100%; }
+
+  .auth-form-header { margin-bottom: 40px; }
+
+  .auth-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .auth-form-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .auth-tabs {
+    display: flex;
+    gap: 4px;
+    background: rgba(245,240,232,0.05);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 36px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .auth-tab.active {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  .social-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: rgba(245,240,232,0.05);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    margin-bottom: 10px;
+  }
+
+  .social-btn:hover {
+    background: rgba(245,240,232,0.09);
+    border-color: rgba(245,240,232,0.15);
+  }
+
+  .social-btn svg { width: 18px; height: 18px; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--black-border);
+  }
+
+  .divider span { font-size: 12px; color: var(--text-muted); }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .form-input::placeholder { color: var(--text-muted); }
+
+  .form-input:focus {
+    border-color: var(--accent);
+    background: rgba(200,169,110,0.04);
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.08);
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+  }
+
+  .btn-primary:active { transform: translateY(0); }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .form-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .form-footer a:hover { text-decoration: underline; }
+
+  /* ── CHAT APP ────────────────────────────────────────── */
+  #chat-app {
+    display: none;
+    height: 100vh;
+    flex-direction: row;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--black-card);
+    border-right: 1px solid var(--black-border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--black-border);
+  }
+
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .sidebar-logo-mark {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .sidebar-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .sidebar-logo-text span { color: var(--accent); }
+
+  .new-chat-btn {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: var(--radius-sm);
+    color: var(--accent);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .new-chat-btn:hover {
+    background: rgba(200,169,110,0.16);
+    border-color: rgba(200,169,110,0.35);
+  }
+
+  .sidebar-nav {
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-bottom: 1px solid var(--black-border);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: rgba(245,240,232,0.05); color: var(--text-primary); }
+  .nav-item.active { background: rgba(200,169,110,0.08); color: var(--accent); }
+
+  .sidebar-chats {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 12px;
+  }
+
+  .sidebar-chats::-webkit-scrollbar { width: 3px; }
+  .sidebar-chats::-webkit-scrollbar-track { background: transparent; }
+  .sidebar-chats::-webkit-scrollbar-thumb { background: var(--black-muted); border-radius: 3px; }
+
+  .chats-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+
+  .chat-history-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .chat-history-item:hover { background: rgba(245,240,232,0.05); color: var(--text-primary); }
+  .chat-history-item.active { background: rgba(200,169,110,0.08); color: var(--cream); }
+
+  .sidebar-footer {
+    padding: 16px 12px;
+    border-top: 1px solid var(--black-border);
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .user-info:hover { background: rgba(245,240,232,0.05); }
+
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--accent), #8B6914);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .user-details { flex: 1; min-width: 0; }
+  .user-name { font-size: 13px; font-weight: 500; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .user-plan { font-size: 11px; color: var(--accent); }
+
+  /* Main chat */
+  .chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--black-soft);
+  }
+
+  .chat-topbar {
+    height: 58px;
+    border-bottom: 1px solid var(--black-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+
+  .model-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid var(--black-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .model-selector:hover { border-color: var(--accent); }
+
+  .model-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s;
+    font-size: 16px;
+  }
+
+  .icon-btn:hover { background: rgba(245,240,232,0.06); color: var(--text-primary); }
+
+  /* Chat messages */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 0 20px;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 3px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--black-muted); border-radius: 3px; }
+
+  /* Welcome Screen */
+  .welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 40px 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .welcome-logo {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 40px rgba(200,169,110,0.25);
+  }
+
+  .welcome-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .welcome-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 48px;
+  }
+
+  .suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .suggestion-card {
+    padding: 16px 18px;
+    background: rgba(245,240,232,0.03);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .suggestion-card:hover {
+    background: rgba(200,169,110,0.06);
+    border-color: rgba(200,169,110,0.25);
+    transform: translateY(-2px);
+  }
+
+  .suggestion-card-icon { font-size: 20px; margin-bottom: 10px; }
+  .suggestion-card-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
+  .suggestion-card-sub { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Messages */
+  .message-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .message {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .message.user { flex-direction: row-reverse; }
+
+  .msg-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .msg-avatar.ai {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .msg-avatar.user {
+    background: linear-gradient(135deg, var(--accent), #8B6914);
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .msg-content { flex: 1; min-width: 0; }
+
+  .msg-sender {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .message.user .msg-sender { text-align: right; }
+
+  .msg-bubble {
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 85%;
+  }
+
+  .message.ai .msg-bubble {
+    background: rgba(245,240,232,0.04);
+    border: 1px solid var(--black-border);
+    color: var(--cream);
+    border-radius: 4px 16px 16px 16px;
+  }
+
+  .message.user .msg-bubble {
+    background: linear-gradient(135deg, rgba(200,169,110,0.18), rgba(200,169,110,0.1));
+    border: 1px solid rgba(200,169,110,0.2);
+    color: var(--cream);
+    border-radius: 16px 4px 16px 16px;
+    margin-left: auto;
+  }
+
+  .msg-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .message:hover .msg-actions { opacity: 1; }
+
+  .msg-action-btn {
+    padding: 4px 8px;
+    background: transparent;
+    border: 1px solid var(--black-border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .msg-action-btn:hover { background: rgba(245,240,232,0.05); color: var(--text-secondary); }
+
+  /* Typing indicator */
+  .typing-indicator { display: flex; gap: 5px; padding: 14px 18px; }
+  .typing-dot {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Input Area */
+  .chat-input-area {
+    padding: 16px 24px 24px;
+    flex-shrink: 0;
+  }
+
+  .input-container {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    transition: all 0.2s;
+    min-height: 54px;
+  }
+
+  .input-wrapper:focus-within {
+    border-color: rgba(200,169,110,0.4);
+    background: rgba(200,169,110,0.03);
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.06);
+  }
+
+  .chat-textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+    min-height: 28px;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+
+  .chat-textarea::placeholder { color: var(--text-muted); }
+
+  .chat-textarea::-webkit-scrollbar { width: 3px; }
+  .chat-textarea::-webkit-scrollbar-thumb { background: var(--black-muted); }
+
+  .input-actions { display: flex; gap: 6px; align-items: center; }
+
+  .input-tool-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 15px;
+    transition: all 0.15s;
+  }
+
+  .input-tool-btn:hover { background: rgba(245,240,232,0.06); color: var(--text-secondary); }
+
+  .send-btn {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border: none;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--black);
+    font-size: 16px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(200,169,110,0.3); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .input-footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  @keyframes typingBounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .auth-left { display: none; }
+    .auth-right { width: 100%; }
+    .suggestion-grid { grid-template-columns: 1fr; }
+    .sidebar { width: 68px; }
+    .sidebar-logo-text, .nav-item span, .user-details, .new-chat-btn span, .chats-section-label, .chat-history-item { display: none; }
+    .sidebar-logo { justify-content: center; }
+    .new-chat-btn { justify-content: center; }
+    .nav-item { justify-content: center; }
+    .user-info { justify-content: center; }
+    .sidebar-chats { display: none; }
+  }
+
+  /* Notification */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--black-card);
+    border: 1px solid var(--accent);
+    color: var(--cream);
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease both;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Upgrade badge */
+  .upgrade-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.08));
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .upgrade-badge:hover { background: rgba(200,169,110,0.2); }
+
+  /* ── API KEY MODAL ───────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 500; backdrop-filter: blur(6px);
+    animation: fadeIn 0.2s ease both;
+  }
+  .modal-box {
+    background: var(--black-card); border: 1px solid var(--black-border);
+    border-radius: var(--radius); padding: 36px 40px; width: 100%; max-width: 440px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    animation: fadeUp 0.3s ease both;
+  }
+  .modal-icon { font-size: 32px; margin-bottom: 16px; }
+  .modal-title {
+    font-family: 'Playfair Display', serif; font-size: 22px;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .modal-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+  .modal-sub a { color: var(--accent); text-decoration: none; }
+  .modal-sub a:hover { text-decoration: underline; }
+  .modal-key-input {
+    width: 100%; padding: 13px 16px; background: rgba(245,240,232,0.04);
+    border: 1px solid var(--black-border); border-radius: var(--radius-sm);
+    color: var(--text-primary); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-family: monospace; outline: none; transition: all 0.2s;
+    margin-bottom: 12px; letter-spacing: 0.5px;
+  }
+  .modal-key-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,169,110,0.08); }
+  .modal-key-input::placeholder { font-family: 'DM Sans', sans-serif; letter-spacing: 0; color: var(--text-muted); }
+  .modal-note {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: rgba(200,169,110,0.06); border: 1px solid rgba(200,169,110,0.15);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; font-size: 12px;
+    color: var(--text-secondary); line-height: 1.5;
+  }
+  .modal-note-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ AUTH PAGE ═══════════════ -->
+<div id="auth-page">
+  <div class="auth-left">
+    <div class="auth-brand">
+      <div class="auth-logo">
+        <div class="logo-mark">🧠</div>
+        <div class="logo-text">Mindo<span> AI</span></div>
+      </div>
+      <h1 class="auth-tagline">
+        Think <em>smarter</em>,<br>answer faster.
+      </h1>
+      <p class="auth-sub">
+        Your intelligent assistant for every question. Powered by advanced AI to help you solve problems, spark ideas, and get things done.
+      </p>
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">⚡</div>
+          <div>Instant answers to any question</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🔒</div>
+          <div>Private & secure conversations</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🌐</div>
+          <div>Web search & real-time knowledge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-form-container">
+      <div class="auth-form-header">
+        <h2 class="auth-form-title" id="form-title">Welcome back</h2>
+        <p class="auth-form-subtitle" id="form-subtitle">Sign in to continue to Mindo AI</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="setTab('login')">Sign In</button>
+        <button class="auth-tab" onclick="setTab('signup')">Create Account</button>
+      </div>
+
+      <!-- Social -->
+      <button class="social-btn" onclick="quickAuth('Google')">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+      <button class="social-btn" onclick="quickAuth('GitHub')">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        Continue with GitHub
+      </button>
+
+      <div class="divider"><span>or continue with email</span></div>
+
+      <div id="signup-name-field" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" id="reg-name" placeholder="Your name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" id="reg-email" placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="reg-password" placeholder="••••••••">
+      </div>
+
+      <button class="btn-primary" onclick="handleAuth()">
+        <span id="btn-text">Sign In →</span>
+      </button>
+
+      <p class="form-footer" id="form-switch">
+        Don't have an account? <a onclick="setTab('signup')">Create one free</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CHAT APP ═══════════════ -->
+<div id="chat-app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-mark">🧠</div>
+        <div class="sidebar-logo-text">Mindo<span> AI</span></div>
+      </div>
+      <button class="new-chat-btn" onclick="newChat()">
+        ✏️ <span>New Chat</span>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active">
+        💬 <span>Chats</span>
+      </button>
+      <button class="nav-item">
+        🔍 <span>Search</span>
+      </button>
+      <button class="nav-item">
+        📌 <span>Saved</span>
+      </button>
+      <button class="nav-item">
+        ⚙️ <span>Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-chats">
+      <div class="chats-section-label">Today</div>
+      <div id="chat-history"></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-info" onclick="showToast('Profile settings coming soon!')">
+        <div class="user-avatar" id="user-avatar">U</div>
+        <div class="user-details">
+          <div class="user-name" id="user-display-name">User</div>
+          <div class="user-plan">Free Plan</div>
+        </div>
+        <span style="color:var(--text-muted);font-size:14px">⋯</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Chat -->
+  <main class="chat-main">
+    <div class="chat-topbar">
+      <div class="model-selector" onclick="showToast('Model selection coming soon!')">
+        <span class="model-dot"></span>
+        Mindo AI — Standard
+        <span style="color:var(--text-muted);font-size:11px">▾</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="upgrade-badge" onclick="showToast('Upgrade to Mindo Pro for unlimited chats!')">
+          ✦ Get Plus
+        </div>
+        <button class="icon-btn" onclick="showToast('Sharing coming soon!')">↗</button>
+        <button class="icon-btn" onclick="logout()">⎋</button>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+      <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-logo">🧠</div>
+        <h2 class="welcome-title">What's on your mind today?</h2>
+        <p class="welcome-sub">Ask me anything — from complex questions to everyday tasks. I'm here to help you think smarter.</p>
+        <div class="suggestion-grid">
+          <div class="suggestion-card" onclick="useSuggestion('Explain quantum computing in simple terms')">
+            <div class="suggestion-card-icon">⚛️</div>
+            <div class="suggestion-card-title">Explain a concept</div>
+            <div class="suggestion-card-sub">Break down complex topics simply</div>
+          </div>
+          <div class="suggestion-card" onclick="useSuggestion('Help me write a professional email to decline a job offer gracefully')">
+            <div class="suggestion-card-icon">✉️</div>
+            <div class="suggestion-card-title">Write something</div>
+            <div class="suggestion-card-sub">Emails, essays, or content</div>
+          </div>
+          <div class="suggestion-card" onclick="useSuggestion('Give me a productive morning routine for busy professionals')">
+            <div class="suggestion-card-icon">🌅</div>
+            <div class="suggestion-card-title">Get advice</div>
+            <div class="suggestion-card-sub">Personal and professional tips</div>
+          </div>
+          <div class="suggestion-card" onclick="useSuggestion('Debug my Python code: def add(a, b): return a - b')">
+            <div class="suggestion-card-icon">💻</div>
+            <div class="suggestion-card-title">Solve a problem</div>
+            <div class="suggestion-card-sub">Code, math, or logic puzzles</div>
+          </div>
+        </div>
+      </div>
+      <div class="message-wrap" id="messages-container"></div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="input-container">
+        <div class="input-wrapper">
+          <div class="input-actions" style="align-self:flex-end">
+            <button class="input-tool-btn" title="Attach file" onclick="showToast('File upload coming soon!')">📎</button>
+          </div>
+          <textarea
+            class="chat-textarea"
+            id="chat-input"
+            placeholder="Ask Mindo anything..."
+            rows="1"
+            onkeydown="handleKey(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+          <div class="input-actions" style="align-self:flex-end">
+            <button class="input-tool-btn" title="Voice input" onclick="showToast('Voice input coming soon!')">🎤</button>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">
+              ↑
+            </button>
+          </div>
+        </div>
+        <div class="input-footer">Mindo AI can make mistakes. Consider checking important information.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ── STATE ─────────────────────────────────────────────
+let currentUser = null;
+let currentTab = 'login';
+let messages = [];
+let chatHistories = [
+  { id: 1, title: 'Python debugging help', active: false },
+  { id: 2, title: 'Marketing strategy ideas', active: false },
+  { id: 3, title: 'Recipe for pasta bake', active: false },
+];
+let isTyping = false;
+let MINDO_KEY = null; // in-memory only, never persisted
+
+// ── AUTH ──────────────────────────────────────────────
+function setTab(tab) {
+  currentTab = tab;
+  const tabs = document.querySelectorAll('.auth-tab');
+  tabs[0].classList.toggle('active', tab === 'login');
+  tabs[1].classList.toggle('active', tab === 'signup');
+  document.getElementById('signup-name-field').style.display = tab === 'signup' ? 'block' : 'none';
+  document.getElementById('form-title').textContent = tab === 'login' ? 'Welcome back' : 'Create your account';
+  document.getElementById('form-subtitle').textContent = tab === 'login' ? 'Sign in to continue to Mindo AI' : 'Start thinking smarter for free';
+  document.getElementById('btn-text').textContent = tab === 'login' ? 'Sign In →' : 'Create Account →';
+  document.getElementById('form-switch').innerHTML = tab === 'login'
+    ? 'Don\'t have an account? <a onclick="setTab(\'signup\')">Create one free</a>'
+    : 'Already have an account? <a onclick="setTab(\'login\')">Sign in</a>';
+}
+
+function quickAuth(provider) {
+  const name = prompt(`Enter your name for ${provider} auth:`, 'Alex Johnson');
+  if (!name) return;
+  loginUser({ name, email: `user@${provider.toLowerCase()}.com` });
+}
+
+function handleAuth() {
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  if (!email || !password) { showToast('Please fill in all fields.'); return; }
+  if (password.length < 6) { showToast('Password must be at least 6 characters.'); return; }
+  const name = currentTab === 'signup'
+    ? (document.getElementById('reg-name').value.trim() || email.split('@')[0])
+    : email.split('@')[0];
+  loginUser({ name, email });
+}
+
+function loginUser(user) {
+  currentUser = user;
+  document.getElementById('auth-page').style.display = 'none';
+  document.getElementById('chat-app').style.display = 'flex';
+  const initials = user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('user-avatar').textContent = initials;
+  document.getElementById('user-display-name').textContent = user.name;
+  renderChatHistory();
+  showToast(`Welcome, ${user.name.split(' ')[0]}! 👋`);
+  if (!MINDO_KEY) setTimeout(showApiKeyModal, 600);
+}
+
+function logout() {
+  currentUser = null;
+  messages = [];
+  document.getElementById('chat-app').style.display = 'none';
+  document.getElementById('auth-page').style.display = 'flex';
+  document.getElementById('messages-container').innerHTML = '';
+  document.getElementById('welcome-screen').style.display = 'flex';
+}
+
+// ── CHAT HISTORY ──────────────────────────────────────
+function renderChatHistory() {
+  const container = document.getElementById('chat-history');
+  container.innerHTML = chatHistories.map(h => `
+    <div class="chat-history-item ${h.active ? 'active' : ''}" onclick="loadChat(${h.id})">${h.title}</div>
+  `).join('');
+}
+
+function loadChat(id) {
+  chatHistories.forEach(h => h.active = h.id === id);
+  renderChatHistory();
+  showToast('Loading saved chat...');
+}
+
+function newChat() {
+  messages = [];
+  document.getElementById('messages-container').innerHTML = '';
+  document.getElementById('welcome-screen').style.display = 'flex';
+  chatHistories.forEach(h => h.active = false);
+  renderChatHistory();
+}
+
+// ── MESSAGING ─────────────────────────────────────────
+function useSuggestion(text) {
+  document.getElementById('chat-input').value = text;
+  autoResize(document.getElementById('chat-input'));
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 180) + 'px';
+}
+
+async function sendMessage() {
+  if (isTyping) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Hide welcome
+  document.getElementById('welcome-screen').style.display = 'none';
+
+  // Add user message
+  appendMessage('user', text);
+  messages.push({ role: 'user', content: text });
+  input.value = '';
+  input.style.height = 'auto';
+
+  // Save to history
+  if (messages.length === 1) {
+    const title = text.slice(0, 40) + (text.length > 40 ? '…' : '');
+    chatHistories.unshift({ id: Date.now(), title, active: true });
+    chatHistories.forEach((h, i) => h.active = i === 0);
+    renderChatHistory();
+  }
+
+  isTyping = true;
+  showTyping();
+
+  try {
+    if (!MINDO_KEY) { removeTyping(); isTyping = false; showApiKeyModal(); return; }
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': MINDO_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'You are Mindo AI, a smart, friendly, and helpful AI assistant. You help users with everyday questions, problem-solving, writing, coding, and more. Keep responses clear, well-structured, and conversational. Use markdown formatting where helpful.',
+        messages: messages.slice(-20)
+      })
+    });
+    const data = await response.json();
+    removeTyping();
+    if (data.error) throw new Error(data.error.message);
+    const reply = data.content?.[0]?.text || "I'm having trouble responding right now. Please try again.";
+    appendMessage('ai', reply);
+    messages.push({ role: 'assistant', content: reply });
+  } catch (err) {
+    removeTyping();
+    const msg = err.message?.includes('401') || err.message?.includes('auth')
+      ? "Invalid API key. Please check and re-enter your key."
+      : "Connection error. Please check your API key and try again.";
+    appendMessage('ai', msg);
+    if (err.message?.includes('401')) { MINDO_KEY = null; }
+  }
+
+  isTyping = false;
+}
+
+function appendMessage(role, content) {
+  const container = document.getElementById('messages-container');
+  const id = 'msg-' + Date.now();
+  const isUser = role === 'user';
+  const initials = currentUser
+    ? currentUser.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)
+    : 'U';
+
+  const formatted = formatContent(content);
+
+  const el = document.createElement('div');
+  el.className = `message ${role}`;
+  el.id = id;
+  el.innerHTML = `
+    <div class="msg-avatar ${role}">${isUser ? initials : 'M'}</div>
+    <div class="msg-content">
+      <div class="msg-sender">${isUser ? (currentUser?.name?.split(' ')[0] || 'You') : 'Mindo AI'}</div>
+      <div class="msg-bubble">${formatted}</div>
+      ${!isUser ? `<div class="msg-actions">
+        <button class="msg-action-btn" onclick="copyMsg('${id}')">Copy</button>
+        <button class="msg-action-btn" onclick="showToast('Regenerating...')">Retry</button>
+      </div>` : ''}
+    </div>
+  `;
+  container.appendChild(el);
+  scrollToBottom();
+}
+
+function formatContent(text) {
+  // Basic markdown-like formatting
+  return text
+    .replace(/```([\s\S]*?)```/g, '<pre style="background:rgba(245,240,232,0.05);border:1px solid #2A2A2A;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:13px;overflow-x:auto;margin:10px 0;white-space:pre-wrap">$1</pre>')
+    .replace(/`([^`]+)`/g, '<code style="background:rgba(245,240,232,0.07);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px">$1</code>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/^### (.*)/gm, '<h3 style="font-size:15px;font-weight:600;color:var(--cream);margin:12px 0 6px">$1</h3>')
+    .replace(/^## (.*)/gm, '<h2 style="font-size:17px;font-weight:600;color:var(--cream);margin:14px 0 8px">$1</h2>')
+    .replace(/^- (.*)/gm, '<li style="margin:4px 0;padding-left:4px">$1</li>')
+    .replace(/(<li.*<\/li>)/s, '<ul style="padding-left:20px;margin:8px 0">$1</ul>')
+    .replace(/\n\n/g, '</p><p style="margin-top:10px">')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  const container = document.getElementById('messages-container');
+  const el = document.createElement('div');
+  el.className = 'message ai';
+  el.id = 'typing-indicator';
+  el.innerHTML = `
+    <div class="msg-avatar ai">M</div>
+    <div class="msg-content">
+      <div class="msg-sender">Mindo AI</div>
+      <div class="msg-bubble" style="padding:10px 18px">
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  container.appendChild(el);
+  scrollToBottom();
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function scrollToBottom() {
+  const el = document.getElementById('chat-messages');
+  el.scrollTop = el.scrollHeight;
+}
+
+function copyMsg(id) {
+  const el = document.getElementById(id);
+  const text = el.querySelector('.msg-bubble').innerText;
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard!'));
+}
+
+// ── TOAST ─────────────────────────────────────────────
+function showToast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// ── API KEY MODAL ─────────────────────────────────────
+function showApiKeyModal() {
+  document.getElementById('api-key-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('api-key-input').focus(), 100);
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key.startsWith('sk-ant-')) {
+    showToast('Please enter a valid Anthropic API key (starts with sk-ant-)');
+    return;
+  }
+  MINDO_KEY = key;
+  document.getElementById('api-key-modal').style.display = 'none';
+  document.getElementById('api-key-input').value = ''; // clear from DOM immediately
+  showToast('API key connected! Start chatting ✓');
+}
+
+</script>
+
+<!-- API Key Modal -->
+<div id="api-key-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon">🔑</div>
+    <h3 class="modal-title">Connect your API Key</h3>
+    <p class="modal-sub">
+      Mindo AI runs on your own Anthropic API key — your data stays yours.
+      Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+    </p>
+    <input
+      class="modal-key-input"
+      id="api-key-input"
+      type="password"
+      placeholder="sk-ant-api03-..."
+      onkeydown="if(event.key==='Enter') saveApiKey()"
+    >
+    <div class="modal-note">
+      <span class="modal-note-icon">🔒</span>
+      <span>Your key is stored in memory only — it's never saved to disk, sent to our servers, or stored in your browser.</span>
+    </div>
+    <button class="btn-primary" onclick="saveApiKey()">Connect & Start Chatting →</button>
+  </div>
+</div>
+
+</body>
+</html>
